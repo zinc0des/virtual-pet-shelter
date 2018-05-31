@@ -1,10 +1,19 @@
 package org.virtualpetshelter;
 
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.ArrayList;
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
+
+import org.omg.CosNaming._BindingIteratorImplBase;
+
 
 public class VirtualPet {
 // instance variables
 	private String virtualPetName;
+	private ArrayList<String> descriptionList;
 	private int hunger;
 	private int thirst;
 	private int tiredness;
@@ -14,10 +23,16 @@ public class VirtualPet {
 	// Constructor
 	public VirtualPet(String virtualPetName) {
 		this.setVirtualPetName(virtualPetName);
-		this.hunger = ThreadLocalRandom.current().nextInt(1, 99);
-		this.thirst = ThreadLocalRandom.current().nextInt(1, 99);
-		this.tiredness = ThreadLocalRandom.current().nextInt(1, 99);
-		this.boredom = ThreadLocalRandom.current().nextInt(1, 99);
+		this.descriptionList = new ArrayList<String>();
+		this.descriptionList.add(" loves to roll on soft grass!");
+		this.descriptionList.add(" is rather fidgety today.");
+		this.descriptionList.add(" love to lick your face!");
+		this.descriptionList.add(" is rather feisty today.");
+		this.descriptionList.add(" has mesmerizingly innocent eyes.");
+		this.hunger = ThreadLocalRandom.current().nextInt(1, 20);
+		this.thirst = ThreadLocalRandom.current().nextInt(1, 20);
+		this.tiredness = ThreadLocalRandom.current().nextInt(1, 20);
+		this.boredom = ThreadLocalRandom.current().nextInt(1, 20);
 		this.age = 0;
 	}
 
@@ -53,6 +68,12 @@ public class VirtualPet {
 	public void setPlay(int boredom) {
 		this.boredom = boredom;
 	}
+	
+	public String getDescription() {
+		return this.descriptionList.get(ThreadLocalRandom.current().nextInt(0, this.descriptionList.size()));
+	}
+
+	
 
 	// Tick method increments the age of of the animal as well as general health
 	// status such as hunger and thirst of the animal if the appropriate action does
@@ -60,60 +81,64 @@ public class VirtualPet {
 	// eventually lead the animal to perish and the game will be over.
 
 	public void tick() {
-		this.hunger += 5;
-		this.thirst += 10;
-		this.tiredness += 20;
-		this.boredom += 30;
+		this.hunger += 1;
+		this.thirst += 1;
+		this.tiredness += 1;
+		this.boredom += 1;
 		this.age += 1;
-		System.out.println("Current Age of Marty: " + this.getAge());
-		System.out.println("Current Hunger status of Marty: " + this.getHunger());
-		System.out.println("Current Thirst level of Marty: " + this.getThirst());
-		System.out.println("Current Boredom level of Marty: " + this.getPlay());
-		System.out.println("Current Tiredness of Marty: " + this.getSleep());
-		if (this.getAge() >= 50 || this.getHunger() >= 100 || this.getThirst() >= 100) {
-			this.perish();
-		}
 		if (this.getHunger() > 90 && this.getHunger() < 100) {
-			System.out.println("Feed me!");
+			System.out.println(this.getVirtualPetName() + "  may need to be fed!");
 		}
 		if (this.getThirst() > 90 && this.getThirst() < 100) {
-			System.out.println("Give me anything to drink!");
+			System.out.println(this.getVirtualPetName() + " seems to be thirsty!");
 		}
 		if (this.getSleep() > 95 && this.getSleep() < 100) {
-			System.out.println("Please allow me to sleep!");
+			System.out.println(this.getVirtualPetName() + " may be tired!");
 		}
 		if (this.getPlay() > 95 && this.getPlay() < 100) {
-			System.out.println("I'm bored. Please play with me!");
+			System.out.println(this.getVirtualPetName() + " seems to be bored. Please play with it!");
 		}
 	}
 
-	private void perish() {
-		System.out.println("Bless the soul of poor Marty the Sloth!");
-		System.out.println("Thank you for playing!");
-		System.exit(0);
-	}
 
 	public void feed() {
-		int randomNum = ThreadLocalRandom.current().nextInt(1, this.getHunger());
-		System.out.println("Hunger before being Fed: " + this.getHunger());
+		int randomNum;
+		if (this.getHunger() <= 1) {
+			randomNum = 0;
+		} else {
+			randomNum = ThreadLocalRandom.current().nextInt(1, this.getHunger());
+		}
 		this.hunger -= randomNum;
 	}
 
 	public void water() {
-		int randomNum = ThreadLocalRandom.current().nextInt(1, this.getThirst());
-		System.out.println("Thirst before drinking water: " + this.getThirst());
+		int randomNum;
+		if (this.getThirst() <= 1) {
+			randomNum = 0;
+		} else {
+			randomNum = ThreadLocalRandom.current().nextInt(1, this.getThirst());
+		}
 		this.thirst -= randomNum;
 	}
 
 	public void makeSleep() {
-		int randomNum = ThreadLocalRandom.current().nextInt(1, this.getSleep());
-		System.out.println("Tiredness before a nap: " + this.getSleep());
+		int randomNum;
+		if (this.getSleep() <= 1) {
+			randomNum = 0;
+		} else {
+		 randomNum = ThreadLocalRandom.current().nextInt(1, this.getSleep());
+		}
 		this.tiredness -= randomNum;
 	}
 
 	public void playWith() {
-		int randomNum = ThreadLocalRandom.current().nextInt(1, this.getPlay());
-		System.out.println("Boredom before playing: " + this.getPlay());
+		System.out.println("OK, you play with " + this.getVirtualPetName());
+		int randomNum;
+		if (this.getPlay() <= 1) {
+			randomNum = 0;
+		} else {
+		randomNum = ThreadLocalRandom.current().nextInt(1, this.getPlay());
+		}
 		this.boredom -= randomNum;
 	}
 
@@ -141,4 +166,6 @@ public class VirtualPet {
 	}
 
 	}
+
+	
 }

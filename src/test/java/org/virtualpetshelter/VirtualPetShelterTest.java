@@ -60,6 +60,7 @@ public class VirtualPetShelterTest {
 		petShelter.tickAll();
 		assertTrue(currentThirst < myPet1.getThirst() && currentSleep < myPet1.getSleep() && currentHunger < myPet2.getHunger() && currentBoredom < myPet2.getPlay());
 	}
+	
 
 	
 	

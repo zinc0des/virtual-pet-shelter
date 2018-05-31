@@ -41,7 +41,7 @@ public class VirtualPetClient {
 			print("What do you want to do?");
 			int userInput = 0;
 			while ((userInput < 1) && (userInput < 5)) {
-				print("1: Feed Marty");
+				print("1: Feed a pet");
 				print("2: Water Marty");
 				print("3: Put Marty to sleep");
 				print("4: Play with Marty");
