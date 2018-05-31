@@ -4,14 +4,25 @@ import static org.hamcrest.Matchers.comparesEqualTo;
 import static org.hamcrest.Matchers.eventFrom;
 import static org.hamcrest.Matchers.stringContainsInOrder;
 
+import java.security.cert.PKIXRevocationChecker.Option;
 import java.util.Collection;
 import java.util.IllegalFormatFlagsException;
 import java.util.Scanner;
 
 import org.hamcrest.Description;
+import org.junit.experimental.theories.Theories;
 import org.mockito.internal.debugging.WarningsCollector;
 
 public class VirtualPetShelterApp {
+	
+	/* This virtual pet shelter houses virtual pets. Initially, there are 4 pets in the shelter. 
+	 * Their status is displayed along with the user menu for interacting with the pets.
+	 * The player can feed and water all the pets, play with any pets, adopt a pet or admit a new 
+	 * one into the shelter. The new status of the pets is updated after each selection is made 
+	 * from the user menu. The tick method updates after each turn of the game loop. If any pet dies,
+	 *  they are removed from the shelter. If all pets die, the game is over. If anytime, the player 
+	 *  wants to quit the game, they can do so by typing "Quit".
+	 */
 
 	public static void main(String[] args) {
 		VirtualPetShelter petShelter = new VirtualPetShelter();
@@ -72,7 +83,7 @@ public class VirtualPetShelterApp {
 					print("Pets watered!");
 					petShelter.waterAllPets();
 					break;
-				//Playing with individual pets with their descriptions randomized
+				//Playing with individual pets with their descriptions randomized. Game can be exited by typing "Quit"
 				case 3:
 					System.out.println("Ok, so you'd like to Play with the pet. Please choose one or type 'quit'");
 					print("Which pet would you like to Play With?\n");
@@ -85,6 +96,7 @@ public class VirtualPetShelterApp {
 					}
 					petShelter.pets.get(petName).playWith();
 					break;
+				// Adopting a pet. Can be exited by typing "Quit"
 				case 4:
 					System.out.println("Ok, so you'd like to Adopt a pet. Please choose one or type 'quit':");
 					print("Which pet would you like to Adopt?\n");
@@ -96,6 +108,7 @@ public class VirtualPetShelterApp {
 					}
 					petShelter.adopt(petName);
 					break;
+					//Admitting a pet in the shelter. Game can be exited by typing "Quit"
 				case 5:
 					System.out.println("Ok, so you'd like to Admit a pet.");
 					print("Enter the name of the pet to be Admitted?\n");
@@ -107,6 +120,7 @@ public class VirtualPetShelterApp {
 					}
 					petShelter.admit(petName);
 					break;
+					//Game Quit Option from menu
 				case 6:
 					System.out.println("Ok, Quitting now.");
 					System.exit(0);
