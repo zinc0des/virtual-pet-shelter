@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Virtual Pet Shelter
 ## This ismy virtual pet shelter project
  
@@ -6,3 +7,6 @@
 	 *  they are removed from the shelter. If all pets die, the game is over. If anytime, the player 
 	 *  wants to quit the game, they can do so by typing "Quit".
 	 */
+=======
+
+>>>>>>> 29ad1af02fbda4ea3dceb0d304d4551fd76666ed
